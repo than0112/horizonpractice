@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Revenue Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<h2>Affiliate Revenue Dashboard</h2>
+
+<canvas id="chart"></canvas>
+
+<pre id="table"></pre>
+
+<script>
+async function load() {
+    const res = await fetch("data.json");
+    const data = await res.json();
+
+    const labels = data.map(d => d.item);
+    const clicks = data.map(d => d.clicks);
+    const revenue = data.map(d => d.revenue);
+
+    // 🟢 Chart.js Bar Chart
+    new Chart(document.getElementById("chart"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Clicks",
+                    data: clicks
+                },
+                {
+                    label: "Revenue",
+                    data: revenue
+                }
+            ]
+        }
+    });
+
+    // 🟡 Top 10 Table
+    document.getElementById("table").innerText =
+        JSON.stringify(data, null, 2);
+}
+
+load();
+</script>
+
+</body>
+</html>

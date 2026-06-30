@@ -1,0 +1,44 @@
+name: AI Content System
+
+on:
+  schedule:
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          pip install uv
+          uv sync
+
+      - name: Run Horizon
+        run: uv run horizon
+
+      - name: Run pipeline
+        run: python scripts/pipeline.py
+
+      - name: Generate content
+        run: |
+          python scripts/generate_threads.py
+          python scripts/generate_vocus.py
+          python scripts/dashboard_builder.py
+
+      - name: Commit
+        run: |
+          git config user.name "bot"
+          git config user.email "bot@bot.com"
+
+          git add output dashboard
+
+          git commit -m "daily update" || echo "no change"
+          git push

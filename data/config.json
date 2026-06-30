@@ -1,0 +1,7 @@
+{
+  "rss_sources": [
+    "https://news.ycombinator.com/rss",
+    "https://www.reddit.com/r/artificial/.rss",
+    "https://feeds.feedburner.com/TechCrunch"
+  ]
+}

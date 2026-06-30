@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<script>
+const item = new URLSearchParams(location.search).get("item");
+
+const map = {
+  "chatgpt-course": "https://udemy.com/xxx",
+  "copilot": "https://github.com/features/copilot"
+};
+
+window.location.href = map[item] || "https://google.com";
+</script>
+</html>
