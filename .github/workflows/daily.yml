@@ -22,7 +22,7 @@ jobs:
           uv sync
 
       - name: Run Horizon
-        run: uv run horizonpratice
+        run: uv run python main.py
 
       - name: Run pipeline
         run: python scripts/pipeline.py
