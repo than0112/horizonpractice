@@ -1,5 +1,5 @@
 import json
-import urllib.request
+import requests
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "llama3.1"
